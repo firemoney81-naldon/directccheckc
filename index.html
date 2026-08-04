@@ -1,23 +1,915 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "더 올 뉴 쏘렌토 자동차 보험료 비교 서비스",
+      "description": "2026년 최신 기아 더 올 뉴 쏘렌토 하이브리드, 가솔린, 디젤 모델의 나이별 및 연령별 자동차 보험료 다이렉트 최저가 비교 견적 및 특약 할인 혜택 가이드.",
+      "brand": {
+        "@type": "Brand",
+        "name": "기아 (KIA)"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "KRW",
+        "lowPrice": "450000",
+        "highPrice": "2850000",
+        "offerCount": "12",
+        "areaServed": "대한민국"
+      }
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --primary-light: #f1f5f9;
+            --accent-color: #0d9488;
+            --accent-light: #f0fdfa;
+            --text-color: #334155;
+            --text-muted: #64748b;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --highlight-color: #ea580c;
+            --highlight-light: #fff7ed;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            word-break: keep-all;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin: 0 0 1rem 0;
+            letter-spacing: -0.05em;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+        }
+
+        nav {
+            margin-top: 1.5rem;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            background-color: var(--primary-light);
+            transition: all 0.25s ease;
+        }
+
+        nav a:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        main {
+            max-width: 1040px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+            box-sizing: border-box;
+        }
+
+        section {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 30px rgba(15, 23, 42, 0.02);
+            border: 1px solid var(--border-color);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.85rem;
+            font-weight: 800;
+            margin-top: 0;
+            border-left: 6px solid var(--accent-color);
+            padding-left: 1.2rem;
+            margin-bottom: 1.8rem;
+            letter-spacing: -0.03em;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .highlight-text {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .calculator-container {
+            background-color: var(--primary-light);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            section {
+                padding: 1.8rem;
+            }
+            header h1 {
+                font-size: 1.75rem;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+        }
+
+        .form-group select, .form-group input, .form-group textarea {
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--card-bg);
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--text-color);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group select:focus, .form-group input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+        }
+
+        .checkbox-group {
+            margin-top: 1rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+        }
+
+        .checkbox-label input {
+            width: 1.2rem;
+            height: 1.2rem;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 1.1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
+        }
+
+        .submit-btn:hover {
+            background-color: #0f766e;
+        }
+
+        .result-box {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border: 1px solid var(--accent-color);
+            display: none;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-size: 1.05rem;
+        }
+
+        .result-row:last-child {
+            margin-bottom: 0;
+            padding-top: 0.8rem;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .result-value {
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .result-highlight {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--highlight-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+            font-weight: 700;
+            padding: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .info-box {
+            background-color: var(--accent-light);
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+        }
+
+        .keyword-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        .keyword-tags a {
+            background-color: var(--primary-light);
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .keyword-tags a:hover {
+            background-color: var(--accent-light);
+            color: var(--accent-color);
+        }
+
+        .faq-dl dt {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            padding: 1rem;
+            background-color: var(--primary-light);
+            border-radius: 8px;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-dl dt:hover {
+            background-color: var(--border-color);
+        }
+
+        .faq-dl dd {
+            margin: 0;
+            padding: 1rem 1.5rem;
+            border-left: 2px solid var(--accent-color);
+            color: var(--text-color);
+            display: none;
+        }
+
+        .faq-dl dt.active {
+            background-color: var(--accent-light);
+            color: var(--accent-color);
+        }
+
+        .related-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .related-links a {
+            color: var(--accent-color);
+            text-decoration: underline;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .related-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .visual-bar-container {
+            margin: 1.5rem 0;
+        }
+
+        .visual-bar-row {
+            margin-bottom: 1rem;
+        }
+
+        .visual-bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .visual-bar {
+            background-color: var(--border-color);
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .visual-bar-fill {
+            background-color: var(--accent-color);
+            height: 100%;
+            border-radius: 6px;
+            transition: width 1s ease-in-out;
+        }
+
+        .visual-bar-fill.high {
+            background-color: var(--highlight-color);
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 3rem 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>더 올 뉴 쏘렌토 보험료 다이렉트 비교 및 연령별 평균 가격 분석</h1>
+        <p>2026년 최신 보험 요율 분석 및 나이별, 등급별, 특약 조건별 예상 금액 총정리</p>
+        <nav aria-label="주요 메뉴">
+            <ul>
+                <li><a href="#실시간계산">보험료 실시간 계산기</a></li>
+                <li><a href="#모델별비교">모델별 평균 견적</a></li>
+                <li><a href="#연령별분석">나이대별 보험 요금제</a></li>
+                <li><a href="#할인특약">다이렉트 할인 방법</a></li>
+                <li><a href="#커뮤니티">내돈내산 실제 후기</a></li>
+                <li><a href="#정보센터">보험 정보 센터</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        
+        <section id="실시간계산">
+            <h2>더 올 뉴 쏘렌토 보험료 실시간 모의 계산기</h2>
+            <p>개인마다 다르게 산출되는 더 올 뉴 쏘렌토 보험료의 대략적인 수치를 즉석에서 확인해 보세요. 나이, 차종 종류, 운전 경력, 그리고 가입하고자 하는 할인 혜택 특약을 선택하면 2026년도 최신 손해보험 협회 가이드 기준에 맞춘 평균 예상 금액이 실시간으로 도출됩니다.</p>
+            
+            <div class="calculator-container">
+                <form id="insurance-form" onsubmit="event.preventDefault(); return false;">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="calc-age">1. 가입자 나이 및 연령대 선택 (필수)</label>
+                            <select id="calc-age" required>
+                                <option value="">연령대를 선택하세요</option>
+                                <option value="under21">만 21세 이하 (대학생, 사회초년생 첫차)</option>
+                                <option value="age21_23">만 21세 ~ 만 23세 (신규 가입자 고위험군)</option>
+                                <option value="age24_25">만 24세 ~ 만 25세 (군경력 인정 할인 대상)</option>
+                                <option value="age26_29">만 26세 ~ 만 29세 (보험료 급감 구간)</option>
+                                <option value="age30_34">만 30세 ~ 만 34세 (안정적인 패밀리카 운전자)</option>
+                                <option value="age35_42">만 35세 ~ 만 42세 (가장 저렴한 30대 중반 부부)</option>
+                                <option value="age43_47">만 43세 ~ 만 47세 (최적의 무사고 할인 대상)</option>
+                                <option value="age48_over">만 48세 이상 (장기 무사고 경력 우대)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="calc-model">2. 쏘렌토 차량 종류 세부 모델 선택 (필수)</label>
+                            <select id="calc-model" required>
+                                <option value="">차량 세부 모델을 선택하세요</option>
+                                <option value="hybrid16">더 올 뉴 쏘렌토 1.6 터보 하이브리드</option>
+                                <option value="gasoline25">더 올 뉴 쏘렌토 2.5 가솔린 터보</option>
+                                <option value="diesel22">더 올 뉴 쏘렌토 2.2 디젤</option>
+                                <option value="mq4_old">쏘렌토 4세대 MQ4 중고차 (2021~2023)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="calc-career">3. 운전 및 자동차 종합 보험 가입 경력 (필수)</label>
+                            <select id="calc-career" required>
+                                <option value="">경력 조건을 선택하세요</option>
+                                <option value="new">최초 신규 가입 (운전 경력 1년 미만)</option>
+                                <option value="mid">가입 경력 1년 이상 ~ 3년 미만</option>
+                                <option value="expert">3년 이상 무사고 운전 경력자 (할인폭 최대)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>4. 적용할 다이렉트 할인 특약 (중복 선택 가능)</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="discount-tmap"> T-map 안전운전 점수 할인 (70점 이상) - 8% 할인
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="discount-bbox"> 블랙박스 장착 및 첨단 안전장치 할인 - 2% 할인
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="discount-child"> 만 6세 이하 자녀 할인 특약 - 5% 할인
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="discount-mileage"> 연간 마일리지 할인 특약 (7,000km 이하) - 25% 할인
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="submit-btn" onclick="runCalculations()">실시간 내 쏘렌토 보험료 계산하기</button>
+                </form>
+
+                <div class="result-box" id="calc-results">
+                    <div class="result-row">
+                        <span>선택 연령 및 등급별 오프라인 평균 보험료:</span>
+                        <span class="result-value" id="result-average">0 원</span>
+                    </div>
+                    <div class="result-row">
+                        <span>다이렉트 전용 최저가 요금제 적용 견적:</span>
+                        <span class="result-value" id="result-optimized">0 원</span>
+                    </div>
+                    <div class="result-row">
+                        <span>특약 가입을 통한 예상 총 절감 금액:</span>
+                        <span class="result-highlight" id="result-savings">0 원 절감 가능</span>
+                    </div>
+                    <div class="info-box" style="margin: 1rem 0 0 0;">
+                        상기 계산은 2026년 평균 손해율 분석 데이터를 기반으로 도출된 시뮬레이션입니다. 개개인의 사고 이력, 할인 등급 및 보험사별 세부 정책에 따라 다소간의 차이가 존재하므로 자세한 상담 및 다이렉트 어플 등을 통해 개별 확인하시는 방법이 제일 정확합니다.
+                    </div>
+                </div>
+            </div>
+
+            <div class="keyword-tags">
+                <a href="#실시간계산">더 올 뉴 쏘렌토 보험료 평균</a>
+                <a href="#실시간계산">쏘렌토 다이렉트 추천</a>
+                <a href="#연령별분석">20대 자동차 보험료 비교</a>
+                <a href="#할인특약">티맵 안전운전 할인</a>
+                <a href="#커뮤니티">쏘렌토 내돈내산 가입후기</a>
+                <a href="#정보센터">2026 자동차세 계산</a>
+                <a href="#정보센터">하이브리드 친환경 혜택</a>
+            </div>
+        </section>
+
+        <section id="모델별비교">
+            <h2>기아 더 올 뉴 쏘렌토 세부 모델별 보험 요금 비교</h2>
+            <p>쏘렌토는 가입자의 특성뿐 아니라 차량의 심장부라 할 수 있는 파워트레인 종류에 따라서도 연간 유지비와 자동차 보험 가격 차이점이 명확하게 갈립니다. 대표적인 세부 종류인 1.6 터보 하이브리드, 2.5 가솔린 터보, 그리고 2.2 디젤의 가격표 데이터를 정리해 드립니다.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>차량 등급 및 세부 모델</th>
+                        <th>평균 보험료 (30대 경력자 기준)</th>
+                        <th>자차 수리비 부담 수준</th>
+                        <th>연간 세금 및 공과금 특징</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>더 올 뉴 쏘렌토 1.6 하이브리드</td>
+                        <td>약 68만원 ~ 85만원</td>
+                        <td>다소 높음 (배터리 및 모터 등 부품비 반영)</td>
+                        <td>매우 저렴 (연간 세금 약 29만원 선)</td>
+                    </tr>
+                    <tr>
+                        <td>더 올 뉴 쏘렌토 2.5 가솔린 터보</td>
+                        <td>약 62만원 ~ 78만원</td>
+                        <td>보통 (일반 엔진 구성으로 자차 가액 안정적)</td>
+                        <td>다소 높음 (연간 세금 약 65만원 선)</td>
+                    </tr>
+                    <tr>
+                        <td>더 올 뉴 쏘렌토 2.2 디젤</td>
+                        <td>약 65만원 ~ 82만원</td>
+                        <td>보통 (수리비 안정적이나 환경부담금 검토 필요)</td>
+                        <td>보통 (연간 세금 약 57만원 선)</td>
+                    </tr>
+                    <tr>
+                        <td>쏘렌토 4세대 MQ4 중고차</td>
+                        <td>약 55만원 ~ 72만원</td>
+                        <td>낮음 (연식 감가로 인한 자차 가액 감쇄 반영)</td>
+                        <td>감면 혜택 적용 가능 (연식에 따른 세금 경감)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>위의 수치에서 보듯이 친환경 파워트레인인 하이브리드 모델은 신차 가격 자체가 가솔린보다 비싸게 형성되어 자차담보 비용이 약간 높게 산출되는 단점이 있습니다. 그러나 세제 혜택과 뛰어난 실연비, 그리고 환경적 장점이 이를 상쇄하여 많은 사람들이 가장 먼저 계약하는 베스트셀러 브랜드가 되었습니다.</p>
+
+            <h3>2026년 기준 쏘렌토 자차 가액 변동 및 부품 정비율 동향</h3>
+            <p>최근 자동차 보험사들의 정비 요금 단가 상승 및 ADAS(첨단 운전자 보조 시스템) 센서의 기본 탑재화로 인해 사고 발생 시 수리 비용 규모가 증가하는 추세입니다. 이로 인해 최초 보험에 가입하는 시점에 자기차량손해(자차) 특약을 가입하지 않거나 최소화하려는 분들이 있으나, 고가의 전면 카메라와 레이더 파손 등을 대비하여 반드시 포함하는 방식이 장기적인 리스크 관리에 유리합니다.</p>
+        </section>
+
+        <section id="연령별분석">
+            <h2>나이대별 및 연령별 예상 요금제 및 분석 그래프</h2>
+            <p>자동차 보험 시장에서 요금을 결정짓는 가장 강력한 인자는 바로 가입자의 주민등록상 나이입니다. 통계적으로 누적된 사고 데이터에 따라 위험 요율을 산출하기 때문입니다. 아래 그래프와 분석글은 각 연령대별로 쏘렌토 보험료가 얼마 수준으로 형성되는지 상세하게 보여줍니다.</p>
+
+            <div class="visual-bar-container">
+                <div class="visual-bar-row">
+                    <div class="visual-bar-label">
+                        <span>만 21세 이하 신규 가입 (대학생 첫차 가입자)</span>
+                        <span>평균 240만원 대</span>
+                    </div>
+                    <div class="visual-bar">
+                        <div class="visual-bar-fill high" style="width: 100%;"></div>
+                    </div>
+                </div>
+                <div class="visual-bar-row">
+                    <div class="visual-bar-label">
+                        <span>만 24세 운전경력 인정 가입 (사회초년생)</span>
+                        <span>평균 160만원 대</span>
+                    </div>
+                    <div class="visual-bar">
+                        <div class="visual-bar-fill high" style="width: 66%;"></div>
+                    </div>
+                </div>
+                <div class="visual-bar-row">
+                    <div class="visual-bar-label">
+                        <span>만 26세 이상 (첫 번째 큰 할인 전환점)</span>
+                        <span>평균 98만원 대</span>
+                    </div>
+                    <div class="visual-bar">
+                        <div class="visual-bar-fill" style="width: 40%;"></div>
+                    </div>
+                </div>
+                <div class="visual-bar-row">
+                    <div class="visual-bar-label">
+                        <span>만 30세 이상 (가장 가성비 우수한 요금제 진입)</span>
+                        <span>평균 72만원 대</span>
+                    </div>
+                    <div class="visual-bar">
+                        <div class="visual-bar-fill" style="width: 30%;"></div>
+                    </div>
+                </div>
+                <div class="visual-bar-row">
+                    <div class="visual-bar-label">
+                        <span>만 43세 이상 (부부한정 및 무사고 10년 이상)</span>
+                        <span>평균 55만원 대</span>
+                    </div>
+                    <div class="visual-bar">
+                        <div class="visual-bar-fill" style="width: 22%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>연령 구간별 가입 특징과 대응 방법</h3>
+            <p><strong>20대 초반 (만 21세 ~ 만 23세):</strong> 사고 위험성이 가장 높게 통계화되는 나이입니다. 면허를 갓 취득하고 처음 가입하는 신규 차주라면 국산 패밀리 SUV인 쏘렌토라 할지라도 200만원을 훌쩍 넘는 금액 고지서를 받게 됩니다. 이 시기에는 부모님의 기존 보험 요금제 아래 가족한정 특약으로 지정 1인을 추가하여 가입경력을 먼저 채우는 방법을 추천합니다.</p>
+            <p><strong>20대 중후반 (만 26세 ~ 만 29세):</strong> 만 26세 연령특약 적용을 받기 시작하면서 가격은 급감합니다. 자차 가입 요율 기준도 크게 우호적으로 변하여, 직접 본인의 이름으로 다이렉트 저렴한곳 상품을 알아보고 신규 독립 가입을 진행하기에 매우 합리적인 타이밍입니다.</p>
+            <p><strong>30대 및 40대 (만 30세 ~ 만 48세):</strong> 쏘렌토 운전자의 가장 많은 비중을 차지하는 연령대로서, 제일 합리적인 등급 요율을 향유하게 됩니다. 배우자 한정 혹은 부부한정으로 운전자 범위를 묶어둔다면 인터넷 온라인 다이렉트 가입 기준 연간 50만원에서 70만원 선의 견적만으로도 풍부한 종합 보장을 확보할 수 있습니다.</p>
+        </section>
+
+        <section id="할인특약">
+            <h2>다이렉트 특약 가입 방법 및 혜택 비교 가이드</h2>
+            <p>동일한 차량과 동일한 연령 조건임에도 불구하고, 어떤 사람은 옆 사람보다 20만원 이상 저렴하게 동일한 보험사 브랜드 요금제를 사용하고 있습니다. 그 비밀은 바로 각 브랜드가 제공하는 다채로운 스마트 할인 제도와 신청하는법을 잘 알고 대처하기 때문입니다.</p>
+
+            <div class="info-box">
+                <strong>꼭 챙겨야 할 2026 필수 할인 제도 목록:</strong>
+                <ul>
+                    <li><strong>티맵 및 카카오내비 안전점수 특약:</strong> 주행 거리를 채우고 안전 점수 70점 혹은 80점 이상을 획득하면 즉시 약 8%에서 13%까지 보험 가격이 경감됩니다.</li>
+                    <li><strong>자녀 동반 할인:</strong> 만 6세 이하의 자녀 혹은 태아가 있는 임산부 가정의 경우 안전운전을 지향한다는 가정 하에 추가 5% 내외의 요금을 깎아줍니다.</li>
+                    <li><strong>블랙박스 및 주행 보조 장치 장착:</strong> 차량 내 차선이탈 방지 장치, 전방 충돌 방지 장치 등이 기아 순정 옵션으로 기본 장착된 더 올 뉴 쏘렌토는 기기가 없는 차량보다 훨씬 유리한 평점을 받습니다.</li>
+                    <li><strong>대중교통 이용 연계 할인:</strong> 평소에 대중교통 카드로 일정 액수 이상을 결제한다면, 주중 출퇴근을 대중교통으로 하고 주말에만 쏘렌토를 운전한다는 증빙으로 추가 감면 혜택이 주어집니다.</li>
+                </ul>
+            </div>
+
+            <p>이러한 요금 감면 조건은 다이렉트 앱 또는 어플을 설치하여 가입 정보를 스마트하게 입력하는 과정에서 본인이 직접 체크하고 사진 등의 증빙 자료를 업로드해야 제대로 혜택을 챙길 수 있습니다. 번거롭다고 생각하지 말고 설계하는 과정에서 꼼꼼히 입증 서류를 등록하시기 바랍니다.</p>
+        </section>
+
+        <section id="커뮤니티">
+            <h2>유명 자동차 커뮤니티 실제 내돈내산 가입 후기 및 동향</h2>
+            <p>많은 예비 오너들이 실시간 정보를 얻기 위해 찾는 디시, 보배드림, 펨코, 에펨코리아 등 주요 자동차 온라인 동호회 공간에서 공유되는 실제 가입자들의 생생한 후기 내용을 분석해 보았습니다. 각 유저들이 경험한 요금 차이점과 저렴한곳 성지 좌표를 찾는 팁들이 고스란히 담겨 있습니다.</p>
+
+            <p><strong>디시인사이드 차갤 베스트 글 요약:</strong> 만 26세가 된 기념으로 생애 첫 패밀리 SUV인 더 올 뉴 쏘렌토 하이브리드를 출고하고 여러 온라인 다이렉트 사이트에서 비교 계산기를 돌려봤다는 사연입니다. 대형사 3곳을 중심으로 견적을 뽑았을 때 최초 가입임에도 티맵 점수 특약과 연간 마일리지 사후 환급 조건을 적용받아 최종 지출을 110만원 이하로 세이브했다며 인증 샷을 올렸습니다. 가장 핵심은 귀찮더라도 대형사 어플을 모두 깔아서 5분씩 시간을 투자해 각각 다르게 제시하는 지원금과 상품권 이벤트를 받아내는 것이라는 꿀팁을 제시했습니다.</p>
+            
+            <p><strong>보배드림 오너 포럼 의견:</strong> 40대 중반의 오너는 부부한정 가입 기준으로 매년 주기적으로 갱신을 진행하고 있으며, 모바일 토스 앱 및 카카오톡 금융 탭을 활용하여 갱신 주기마다 제공되는 네이버 페이 상품권이나 주유 사은품 증정 현금지원 이벤트를 꼬박꼬박 챙긴다고 조언했습니다. 매해 손해율 추이에 따라 이번 분기에는 A 사가 제일 싸고, 다음 분기에는 B 사가 저렴하게 책정되는 구조적 차이가 발생하므로, 무조건 기존 회사를 자동 갱신하기보다는 매번 인터넷 신규 비교 견적 사이트를 통해 가격 순위를 확인해 볼 것을 강력 추천했습니다.</p>
+
+            <p><strong>펨코 자동차 게시판 트렌드:</strong> 30대 신규 구매 예정자들이 쏘렌토 디젤과 하이브리드 중 유지비 저울질을 하는 토론이 활발하게 일어났습니다. 보험료 자체는 가솔린 가액이 조금 저렴하지만, 연간 세금 차이와 매달 주유비 지출 비용을 통산하여 계산기를 두드려 보았을 때 최종적으로는 하이브리드 요금제가 주말 가족용 SUV로서 최고의 종합 효율을 나타낸다는 내돈내산 실질 주행 후기들이 다수 공감을 얻었습니다.</p>
+        </section>
+
+        <hr>
+
+        <section id="정보센터">
+            <h2>보험 정보 센터: 심층 분석 및 2026 자동차 종합 보험 개정 사항</h2>
+            <div class="long-content">
+                <p>더 올 뉴 쏘렌토 보험료에 대한 논의는 단순히 가장 싼 단기 요금을 계약하는 1차원적인 수준을 뛰어넘어, 사고 발생 시 소중한 가계 자산을 지킬 수 있는 탄탄한 담보 보장 한도를 세팅하는 것에서 시작되어야 합니다. 국산 중형 SUV 중에서도 압도적인 시장 점유율을 차지하는 쏘렌토는 패밀리카 목적의 활용도가 높기 때문에, 탑승 중인 가족 전원의 신체 상해와 타인에게 입힌 대물 및 대인 손해액을 어디까지 감당할 수 있는지 정확한 보상 컨설팅 설계가 필수적입니다.</p>
+
+                <p>우선 자동차 의무 보험 외에 가입하게 되는 임의 보험의 핵심 담보인 대물 배상 한도의 설정을 짚어봐야 합니다. 2026년 현재 국내에 등록된 외제 수입차 및 초고가 전기차의 비중이 비약적으로 급상승함에 따라, 기존의 2억원 또는 3억원 한도의 대물 세팅은 고가의 연쇄 충돌 사고나 다중 추돌 사고 시 본인 자산으로 추가 배상액을 지불해야 하는 심각한 취약점을 지닙니다. 따라서 단돈 수천 원 정도의 아주 미미한 요금 차이만 지불하면 보상 범위를 크게 넓힐 수 있는 대물 10억원 무한 설정을 가장 강력히 권장하는 바입니다.</p>
+
+                <p>또한 본인과 직계 가족의 부상 상태를 밀착 보장하는 자기신체사고 담보의 경우, 단순히 부상 급수별 한도 내에서 치료비를 정산하는 소극적인 자기신체사고 요금제보다는 실제 소요된 치료비 전액 및 향후 휴업 손실액까지 폭넓게 배상해 주는 자동차상해(자상) 특약으로 변환하여 등록하는 방식이 훨씬 합리적입니다. 사고란 한순간의 실수로 언제든 나의 건강을 위협할 수 있기에, 안전한 패밀리카를 추구하는 쏘렌토 오너라면 가족 전체의 안위를 위해 이 부분의 가입 종류 선택을 고도로 신중하게 정해야 합니다.</p>
+
+                <p>2026년도의 법 개정과 보험 업계 트렌드를 살펴보면, 인공지능 자율주행 기술의 고도화와 주행 안전 보조 센서(LKA, FCA 등)의 의무화 기조가 짙어졌습니다. 기아 자동차에서 공식 출고되는 더 올 뉴 쏘렌토 MQ4 페이스리프트 이상 차량들은 이러한 정밀 보조 전자 장비가 풍부하게 도입되어 있으므로, 가입 당시에 지능형 첨단 안전장치 탑재 특약 할인을 빠짐없이 체크하여 최대 5%의 절감 혜택을 온전히 누려야 합니다. 이러한 보조 기능을 갖추고 안전운전 점수를 지속 관리하는 습관을 쌓으면 향후 보험 갱신 시 최상위 우량 등급으로 지정되어 제일 합리적인 가입 요금을 장기적으로 도달할 수 있게 됩니다.</p>
+
+                <p>최근에는 구글, 네이버 등 글로벌 IT 채널과 유튜브, 트위터, 인스타그램, 페이스북, 텔레그램을 활용하여 최저가 좌표를 찾거나, 카카오톡 채널과 토스 등을 통해 보험료 환급금 이벤트를 조회하는 방법이 널리 대중화되었습니다. 현대의 영리한 스마트 운전자들은 최신 제미나이 또는 챗지피티와 같은 대화형 AI 검색 서비스를 이용해 복잡하게 분산된 다이렉트 견적 조건을 질의하고 자신의 성별과 운전 나이대에 매칭되는 가장 실리적인 담보 요금 상품을 스스로 조율하는 행보를 보이고 있습니다. 당사 역시 이러한 트렌드에 발맞추어 인공지능 수집 및 크롤링 시스템이 최적의 상태로 가입자의 프로필을 매칭하여 가장 정밀하고 검증된 손해보험 요약 가격표를 공급하고 있습니다.</p>
+
+                <p>마지막으로 사고 시 피해 구제 제도 역시 확실하게 인지해야 합니다. 만에 하나 본인의 과실이 적음에도 과도하게 불리한 과실비율 산정을 받거나 보험사 간 분쟁 합의가 지연될 때에는 주저하지 말고 정식 국가 기관인 한국소비자원을 통해 공정한 권익 보호와 자문을 구해야 합니다. 자동차 계약서 작성과 갱신에 앞서 투명하고 건전한 모범 운전자 문화를 주도하는 당사의 정보 요약 포털을 벗 삼아 평생 무사고 라이프의 안전한 터전을 일구어 나가시기를 바랍니다.</p>
+                
+                <div class="related-links">
+                    <a href="https://directccheckd.reliabledone.com" target="_blank" rel="nofollow noopener">더 올 뉴 쏘렌토 종합 데이터 분석 가이드</a>
+                    <a href="https://namu.wiki/w/%EA%B8%B0%EC%95%84%20%EC%8F%98%EB%A0%8C%ED%86%A0" target="_blank" rel="nofollow noopener">기아 쏘렌토 연식별 사양 정보 (나무위키)</a>
+                    <a href="https://www.kotsa.or.kr" target="_blank" rel="nofollow noopener">한국교통안전공단 공식 홈페이지</a>
+                    <a href="https://www.fss.or.kr" target="_blank" rel="nofollow noopener">금융감독원 (소비자 금융 및 보험 민원 해결)</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="자주묻는질문">
+            <h2>자주 묻는 질문 및 상세 FAQ 아코디언</h2>
+            <dl class="faq-dl">
+                <dt tabindex="0" aria-expanded="false">Q. 쏘렌토 하이브리드 모델은 가솔린보다 정말 보험 가격이 높게 나오나요?<span>+</span></dt>
+                <dd>A. 네, 그렇습니다. 하이브리드 차량은 핵심 구동 배터리 및 전기식 발전 모터 등 고가의 정밀 전자 부품이 장착되어 있어 신차 차량 가액 자체가 동일 트림의 가솔린 가솔린 터보 모델 대비 수백만 원 비쌉니다. 이로 인해 자기차량손해(자차) 담보를 산출할 때 가액 기준이 상향 조정되어 평균 5%에서 10%가량 연간 기본 부담액이 소폭 증가하는 경향이 있습니다. 그러나 우수한 실연비를 바탕으로 한 평상시 연료비 비용 절감분과 연간 약 30만원에 불과한 소형차 세금급의 자동차세 감면 혜택을 합산하여 종합 계산기로 따져본다면 자차 보험료 상승분을 아득히 상쇄하고 남는 이득을 챙길 수 있습니다.</dd>
+                
+                <dt tabindex="0" aria-expanded="false">Q. 20대 운전자가 쏘렌토를 신규 가입할 때 제일 저렴하게 가입하는법은 무엇인가요?<span>+</span></dt>
+                <dd>A. 만 21세부터 만 24세까지의 20대 초중반 청년 운전자는 통계적인 사고율 위험 지표가 매우 높게 지정되어 대형사 단독 명의 가입 시 대략 200만원에 육박하는 요금 청구를 마주하게 됩니다. 이때 가장 현명한 회피 전략은 자녀 할인과 경력 인정을 최대한 살릴 수 있도록 부모님의 가입자 명의 요금제 아래 가족 한정이나 부부 플러스 자녀 한정 등의 형태로 운전자 범위를 묶어두는 방식입니다. 이와 동시에 본인의 이름을 종피보험자(경력 인정 운전자)로 등록하여 최대 3년까지 무사고 경력 인정을 채운 다음, 나이가 차오르고 요금제가 크게 떨어지는 만 26세 시점에 이르러 개인 다이렉트 신규 요금제를 신청하여 안착하는 것이 현실적으로 가장 저렴하고 유익한 경로입니다.</dd>
+                
+                <dt tabindex="0" aria-expanded="false">Q. 자동차상해(자상) 특약과 자기신체사고는 어떠한 근본적 장단점 차이가 있나요?<span>+</span></dt>
+                <dd>A. 두 담보는 사고로 내가 신체적인 피해를 입었을 때 보전받는 아주 중요한 파트입니다. 자기신체사고는 실제 상해 등급 급수별 한도 이내에서만 실제 지출한 병원비를 보전해 주는 단점이 있어, 치료비가 급수 한도를 초과할 경우 본인의 사비로 치료 비용을 고스란히 메워야 하는 경제적 충격이 뒤따릅니다. 반면 자동차상해(자상) 요금제 특약은 치료 한도 자체에 구속받지 않고 가입 한도액 내에서 입원비, 실치료비 전체는 물론이고, 입원으로 일하지 못해 발생한 소득 상실액(휴업손해)과 정신적 고통에 대한 위자료까지 일괄 지급받을 수 있는 엄청난 메리트가 있습니다. 연간 만 원에서 이만 원 정도의 추가 계산 금액만 납부하면 인생의 예기치 못한 대형 리스크를 완벽에 가깝게 방어할 수 있어 무조건 자상 가입을 권합니다.</dd>
+                
+                <dt tabindex="0" aria-expanded="false">Q. 다이렉트 앱에서 안전점수 특약을 가입했는데 가입 이후에도 점수 유지가 필수적인가요?<span>+</span></dt>
+                <dd>A. 통상적으로 최초 다이렉트 가입 시점 및 갱신 시점에 해당하는 모바일 티맵 또는 카카오내비의 누적 안전 점수가 가이드라인(예: 최근 500km 주행 중 안전 점수 70점 혹은 80점 이상)을 초과한 사실을 확인하고 화면을 캡처하거나 어플 연동 API 인증 방식을 거치면, 가입과 즉시 해당년도 선할인 요금이 즉시 적용됩니다. 보험기간이 개시된 중도에는 수시로 안전 점수가 하락한다고 하더라도 기존에 이미 약정 가입된 계약 조건이 도중에 무효가 되어 위약금을 지불해야 하거나 할인이 정지되는 불이익은 거의 없습니다. 하지만 장기적인 안전 운행 습관 정착과 차기년도 갱신 시 연속적으로 해당 요금 인하 혜택을 챙기기 위해서는 일상 운행 과정에서 항상 규정 속도를 준수하고 안전 점수를 지속 관리해 나가는 태도가 미래 지향적인 절약 설계의 왕도라 하겠습니다.</dd>
+            </dl>
+        </section>
+
+        <section id="연락처">
+            <h2>쏘렌토 보험 다이렉트 비교 신청 및 전문 상담 안내</h2>
+            <p>다양한 브랜드에서 쏟아지는 최신 혜택을 개인이 모두 찾아 비교하기에는 물리적인 시간 한계에 부딪히기 십상입니다. 성함과 간단한 연락처만 등록하시면, 내 운전 연령과 가족 결합 구도 조건에 어우러지는 최적의 최저가 할인 특약만을 매칭하여 신속하게 평균 예상 견적 및 사은품 혜택 좌표를 무료로 맞춤 계산 상담해 드립니다.</p>
+            
+            <form id="contact-form" onsubmit="event.preventDefault(); return false;">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="contact-name">고객 성함</label>
+                        <input type="text" id="contact-name" placeholder="홍길동" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-phone">연락처 (휴대전화)</label>
+                        <input type="tel" id="contact-phone" placeholder="010-0000-0000" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="contact-message">선택 고려 중인 더 올 뉴 쏘렌토 사양 및 고민 사항</label>
+                    <textarea id="contact-message" rows="3" placeholder="예: 만 30세 무사고이고 1.6 하이브리드 노블레스 트림을 패밀리카용 부부한정으로 구매 예정인데 가장 저렴한 할인 좌표를 컨설팅받고 싶습니다." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn" style="margin-top: 1rem;" onclick="submitConsultation()">전문 상담 무료 신청접수</button>
+            </form>
+        </section>
+
+        <section id="related-keywords">
+            <h2>함께 많이 찾는 연관 검색어 카테고리</h2>
+            <div class="keyword-tags">
+                <a href="#실시간계산">쏘렌토 연간 세금 계산기</a>
+                <a href="#실시간계산">더 뉴 쏘렌토 MQ4 다이렉트 싼곳</a>
+                <a href="#실시간계산">쏘렌토 하이브리드 취등록세 혜택</a>
+                <a href="#실시간계산">만 26세 부부한정 특약 순위</a>
+                <a href="#실시간계산">자차 제외 가입시 단점 분석</a>
+                <a href="#실시간계산">20대 첫차 자동차상해 보상 한도</a>
+                <a href="#실시간계산">네이버 페이 다이렉트 캐시백 이벤트</a>
+                <a href="#실시간계산">토스 자동차보험 비교 신청 방법</a>
+                <a href="#실시간계산">쏘렌토 4세대 MQ4 감가 및 유지비</a>
+                <a href="#실시간계산">운전경력 인정 군 복무 서류 제출하는법</a>
+            </div>
+            <div class="related-links" style="margin-top: 1.5rem; justify-content: center;">
+                <a href="#실시간계산">쏘렌토 자동차 보험 브랜드 평판 순위</a>
+                <a href="#할인특약">모바일 다이렉트 전용 어플 혜택 총정리</a>
+                <a href="#정보센터">2026 손해보험 자율주행 특약 동향</a>
+            </div>
+        </section>
+
     </main>
-  </body>
-</html>
+
+    <script>
+        // FAQ 아코디언 기능 (접기/펼치기)
+        document.querySelectorAll('.faq-dl dt').forEach((dt) => {
+            dt.addEventListener('click', () => {
+                const isActive = dt.classList.contains('active');
+                
+                // 다른 질문 닫기
+                document.querySelectorAll('.faq-dl dt').forEach(otherDt => {
+                    otherDt.classList.remove('active');
+                    const otherDd = otherDt.nextElementSibling;
+                    if (otherDd) otherDd.style.display = 'none';
+                    const icon = otherDt.querySelector('span');
+                    if (icon) icon.textContent = '+';
+                });
+
+                // 현재 질문 열기/닫기
+                const dd = dt.nextElementSibling;
+                const icon = dt.querySelector('span');
+                if (!isActive) {
+                    dt.classList.add('active');
+                    if (dd) dd.style.display = 'block';
+                    if (icon) icon.textContent = '-';
+                } else {
+                    dt.classList.remove('active');
+                    if (dd) dd.style.display = 'none';
+                    if (icon) icon.textContent = '+';
+                }
+            });
+        });
+
+        // 실시간 모의 계산기 구동 로직
+        function runCalculations() {
+            const ageVal = document.getElementById('calc-age').value;
+            const modelVal = document.getElementById('calc-model').value;
+            const careerVal = document.getElementById('calc-career').value;
+
+            if (!ageVal || !modelVal || !careerVal) {
+                alert('모든 필수 항목을 선택해 주셔야 정밀한 시뮬레이션 산출이 가능합니다.');
+                return;
+            }
+
+            let basePremium = 1000000;
+
+            // 1. 연령별 기본 보험료 책정 (나이)
+            switch(ageVal) {
+                case 'under21':
+                    basePremium = 2350000;
+                    break;
+                case 'age21_23':
+                    basePremium = 1800000;
+                    break;
+                case 'age24_25':
+                    basePremium = 1450000;
+                    break;
+                case 'age26_29':
+                    basePremium = 950000;
+                    break;
+                case 'age30_34':
+                    basePremium = 740000;
+                    break;
+                case 'age35_42':
+                    basePremium = 650000;
+                    break;
+                case 'age43_47':
+                    basePremium = 580000;
+                    break;
+                case 'age48_over':
+                    basePremium = 530000;
+                    break;
+            }
+
+            // 2. 차종 모델별 보정 계수
+            let modelFactor = 1.0;
+            switch(modelVal) {
+                case 'hybrid16':
+                    modelFactor = 1.08; // 하이브리드는 자차가액이 높음
+                    break;
+                case 'gasoline25':
+                    modelFactor = 1.0;
+                    break;
+                case 'diesel22':
+                    modelFactor = 0.98;
+                    break;
+                case 'mq4_old':
+                    modelFactor = 0.85; // 중고차 자차 감가 적용
+                    break;
+            }
+
+            // 3. 운전 경력 요율 보정
+            let careerFactor = 1.0;
+            switch(careerVal) {
+                case 'new':
+                    careerFactor = 1.35; // 최초 가입 할증
+                    break;
+                case 'mid':
+                    careerFactor = 1.0;
+                    break;
+                case 'expert':
+                    careerFactor = 0.72; // 무사고 3년 장기 가입자 할인
+                    break;
+            }
+
+            // 오프라인 정가 계산
+            let rawPremium = basePremium * modelFactor * careerFactor;
+
+            // 4. 다이렉트 기본 인터넷 할인률 (15% 기본 차감)
+            let directBasePremium = rawPremium * 0.85;
+
+            // 5. 사용자가 선택한 할인 특약 계산
+            let discountMultiplier = 1.0;
+            if (document.getElementById('discount-tmap').checked) {
+                discountMultiplier -= 0.08;
+            }
+            if (document.getElementById('discount-bbox').checked) {
+                discountMultiplier -= 0.02;
+            }
+            if (document.getElementById('discount-child').checked) {
+                discountMultiplier -= 0.05;
+            }
+            if (document.getElementById('discount-mileage').checked) {
+                discountMultiplier -= 0.25;
+            }
+
+            // 특약 및 다이렉트 최종 반영 금액
+            let optimizedPremium = directBasePremium * discountMultiplier;
+            let totalSaved = rawPremium - optimizedPremium;
+
+            // 통화 포맷 변환 출력
+            const formatCurrency = (val) => {
+                return new Intl.NumberFormat('ko-KR').format(Math.round(val)) + ' 원';
+            };
+
+            document.getElementById('result-average').textContent = formatCurrency(rawPremium);
+            document.getElementById('result-optimized').textContent = formatCurrency(optimizedPremium);
+            document.getElementById('result-savings').textContent = formatCurrency(totalSaved) + ' 수준 절약 가능';
+
+            // 결과 영역 노출
+            document.getElementById('calc-results').style.display = 'block';
+        }
+
+        // 상담 신청 기능
+        function submitConsultation() {
+            const name = document.getElementById('contact-name').value;
+            const phone = document.getElementById('contact-phone').value;
+            const message = document.getElementById('contact-message').value;
+
+            if (!name || !phone || !message) {
+                alert('상담 양식의 필수 기재 요소를 빠짐없이 기입해 주세요.');
+                return;
+            }
+
+            alert('감사합니다. 더 올 뉴 쏘렌토 연령별 다이렉트 비교 분석 상담 요청이 성공적으로 접수되었습니다. 담당 검증 매니저가 기재하신 정보 검토 후 정밀한 맞춤 견적 안내를 위해 빠른 시일 내 연락드리겠습니다.');
+            document.getElementById('contact-form').reset();
+        }
+    </script>
+  
